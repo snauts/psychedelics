@@ -1,0 +1,13 @@
+music.ogg   - http://www.freesound.org/people/ERH/sounds/39432/
+vinyl.ogg   - http://freesound.org/people/ZeSoundResearchInc./sounds/117512/
+woosh.ogg   - http://freesound.org/people/toyoto/sounds/93760/
+hisss.ogg   - http://www.freesound.org/people/burriss/sounds/45579/
+beat.ogg    - http://www.freesound.org/people/thecluegeek/sounds/156370/
+xylo*.ogg   - http://freesound.org/people/Timbre/sounds/131557/
+static.ogg  - http://www.freesound.org/people/Jace/sounds/35291/
+caravan.ogg - http://opengameart.org/content/desert-theme
+leaves.ogg  - http://www.freesound.org/people/davilca/sounds/159496/
+burst.ogg   - http://www.freesound.org/people/Zangrutz/sounds/155235/
+sparkle.ogg - http://www.freesound.org/people/Soughtaftersounds/sounds/145459/
+success.ogg - http://www.freesound.org/people/fins/sounds/171670/
+

@@ -1,0 +1,64 @@
+
+* Using RemDebug (Lua remote debugger):
+    - Install Lua on the system (make install).
+    - Install LuaSocket (make install).
+    - Install LuaFileSystem (make install).
+    - Install RemDebug: copy `remdebug` package folder to one
+      of the package.path directories.
+    - Add this code to beginning of first.lua:
+        require("config")
+
+        if Cfg.RemDebug then
+                print("Using RemDebug (Lua remote debugger).")
+                require("remdebug.engine")
+                remdebug.engine.start()
+        end
+    - Make sure that Cfg.RemDebug is true.
+    - Launch RemDebug from terminal:
+        $ cd /path/to/remdebug/src
+        $ lua controller.lua
+    - And then I have no clue what to do because breakpoints
+      are not triggered and single-stepping from the very
+      beginning produces a malloc error.
+
+* Create Xcode4 project:
+    - Choose Cocoa application as template.
+    - Delete AppDelegate.* and main.m files.
+
+    - Target -> Build Phases -> Link Binary With Libraries:
+        - add OpenGL.framework
+        - add SDL frameworks from `macosx/frameworks` dir
+    - Add build phase for copying files to `Frameworks`.
+    - Add the same SDL frameworks to the new phase.
+    - Target -> Build Settings:
+        - `Header Search Paths`: add SDL framework `Headers` subfolders
+        - example: "$(SRCROOT)/../macosx/frameworks/SDL2.framework/Headers"
+
+    - Add liblua.a to `Link With Libraries`.
+    - Add "$(SRCROOT)/../../lua-5.1/src" to header search paths.
+ 
+    - Add all `game-2d/src` files to project.
+    - Add `game2d-cfg.h` file to project.
+
+    - Add macosx/bundle_path.* file to project (they contain an Objective-C
+      function that sets current working directory to app bundle dir).
+      
+    - For SDL1.2 add macosx/SDL_main.* files to project.
+
+    - Add "@executable_path/../Frameworks" as `Runpath Search Paths`
+      build setting.
+
+    - Add new group to project and name it "Data" (name does not matter).
+    - Add game data files that should go into bundle to the new group
+      (make sure to "add folder references", not "sub groups").
+
+* Modify framework paths for SDL, SDL_image, and SDL_mixer libs: 
+    $ install_name_tool -id @executable_path/../Frameworks/SDL.framework/SDL /Library/Frameworks/SDL.framework/SDL
+    .. etc ..
+
+* Codesign all frameworks that are added to published app bundle:
+    $ codesign -vvvv -s 'Mac Developer Application Certificate name' SDL.framework
+    .. etc ..
+
+  NOTE: Frameworks within other frameworks must also be signed.
+
